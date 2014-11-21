@@ -104,17 +104,15 @@ int main(int argc, const char *argv[]) {
 	Directory dir;
 	vector<string> filenames = dir.GetListFiles(input_path , "jpg", true);
 	if(filenames.empty()) cout<<"no inputs!"<<endl;
-    const Mat* frame;
     for(int i=0; i<filenames.size(); i++) {
-		Mat image = imread(input_path + filenames[i]);
-        frame=&image;
-		if(frame->empty())
+		Mat original = imread(input_path + filenames[i]);
+		if(original.empty())
 		{
 			cerr << "Empty Image !!"<<endl;
 			break;
 		}
         // Clone the current frame:
-        Mat original = frame->clone();
+//        Mat original = image.clone();
         // Convert the current frame to grayscale:
         Mat gray;
         cvtColor(original, gray, CV_BGR2GRAY);
