@@ -103,7 +103,11 @@ int main(int argc, const char *argv[]) {
     // Holds the current frame from the Video device:
 	Directory dir;
 	vector<string> filenames = dir.GetListFiles(input_path , "jpg", true);
-	if(filenames.empty()) cout<<"no inputs!"<<endl;
+	if(filenames.empty()) {
+		cout<<"no inputs!"<<endl;
+		return 1;
+	}
+	namedWindow("face_recognizer", CV_WINDOW_NORMAL);
     for(int i=0; i<filenames.size(); i++) {
 		Mat original = imread(input_path + filenames[i]);
 		if(original.empty())
@@ -161,5 +165,6 @@ int main(int argc, const char *argv[]) {
         if(key == 27)
             break;
     }
+	destroyWindow("face_recognizer");
     return 0;
 }
